@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_social_login/flutter_social_login.dart';
+import 'package:flutter_social_login/constant.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +32,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _flutterSocialLoginPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _flutterSocialLoginPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -55,7 +56,14 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              for (int i = 0; i < Social.values.length; i++)
+                ElevatedButton(
+                    onPressed: () {}, child: Text(Social.values[i].name)),
+              Text('Running on: $_platformVersion\n'),
+            ],
+          ),
         ),
       ),
     );
