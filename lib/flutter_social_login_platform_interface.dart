@@ -51,12 +51,12 @@ abstract class FlutterSocialLoginPlatform extends PlatformInterface {
     throw UnimplementedError('signInWithNaver() has not been implemented.');
   }
 
-  Future<UserCredential?> signInWithAppleForAndroid() async {
+  Future<LinkedHashMap<String, String?>> signInWithAppleForAndroid() async {
     throw UnimplementedError(
         'signInWithAppleForAndroid() has not been implemented.');
   }
 
-  Future<UserCredential?> signInWithApple() async {
+  Future<UserCredential> signInWithApple() async {
     throw UnimplementedError('signInWithApple() has not been implemented.');
   }
 }

@@ -36,11 +36,11 @@ class FlutterSocialLogin {
     return FlutterSocialLoginPlatform.instance.signInWithNaver();
   }
 
-  Future<UserCredential?> signInWithAppleForAndroid() async {
+  Future<LinkedHashMap<String, String?>> signInWithAppleForAndroid() async {
     return FlutterSocialLoginPlatform.instance.signInWithAppleForAndroid();
   }
 
-  Future<UserCredential?> signInWithApple() async {
+  Future<UserCredential> signInWithApple() async {
     return FlutterSocialLoginPlatform.instance.signInWithApple();
   }
 }

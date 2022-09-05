@@ -8,10 +8,13 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
+  crypto: ^3.0.2
   firebase_auth: ^3.7.0
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  sign_in_with_apple: ^4.1.0
+  twitter_login: ^4.2.3
 
 dev_dependencies:
   flutter_test:
