@@ -254,17 +254,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.asset(
-                                    'assets/images/login_logo_twitter.svg',
-                                  ).image,
-                                ),
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Color(0x30A5A5A5),
                                   width: 1,
                                 ),
+                              ),
+                              child: SvgPicture.asset(
+                                'assets/images/login_logo_twitter.svg',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             Container(
@@ -272,17 +272,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.asset(
-                                    'assets/images/login_logo_facebook.svg',
-                                  ).image,
-                                ),
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Color(0x30A5A5A5),
                                   width: 1,
                                 ),
+                              ),
+                              child: Image.asset(
+                                'assets/images/login_logo_facebook.png',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             Container(
@@ -290,17 +290,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.asset(
-                                    'assets/images/naver.svg',
-                                  ).image,
-                                ),
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Color(0x30A5A5A5),
                                   width: 1,
                                 ),
+                              ),
+                              child: SvgPicture.asset(
+                                'assets/images/naver.svg',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ],
@@ -317,17 +317,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.asset(
-                                    'assets/images/login_logo_kakao.svg',
-                                  ).image,
-                                ),
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Color(0x30A5A5A5),
                                   width: 1,
                                 ),
+                              ),
+                              child: SvgPicture.asset(
+                                'assets/images/login_logo_kakao.svg',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             Container(
@@ -335,17 +335,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.asset(
-                                    'assets/images/login_logo_google.svg',
-                                  ).image,
-                                ),
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Color(0x30A5A5A5),
                                   width: 1,
                                 ),
+                              ),
+                              child: SvgPicture.asset(
+                                'assets/images/login_logo_google.svg',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             Container(
@@ -353,17 +353,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.asset(
-                                    'assets/images/login_logo_apple_black.svg',
-                                  ).image,
-                                ),
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Color(0x30A5A5A5),
                                   width: 1,
                                 ),
+                              ),
+                              child: Image.asset(
+                                'assets/images/login_logo_apple_black.png',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ],
