@@ -50,8 +50,7 @@ class MockFlutterSocialLoginPlatform
   }
 
   @override
-  Future<UserCredential?> signInWithTwitter() {
-    // TODO: implement signInWithTwitter
+  Future<UserCredential?> signInWithTwitter(apiKey, apiSecretKey, redirectUri) {
     throw UnimplementedError();
   }
 }

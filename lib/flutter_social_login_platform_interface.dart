@@ -31,7 +31,8 @@ abstract class FlutterSocialLoginPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<UserCredential?> signInWithTwitter() async {
+  Future<UserCredential?> signInWithTwitter(
+      String apiKey,String apiSecretKey,String redirectUri) async {
     throw UnimplementedError('signInWithGoogle() has not been implemented.');
   }
 

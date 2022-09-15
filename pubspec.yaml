@@ -15,6 +15,13 @@ dependencies:
   plugin_platform_interface: ^2.0.2
   sign_in_with_apple: ^4.1.0
   twitter_login: ^4.2.3
+  flutter_naver_login:
+    git:
+      url: https://github.com/yongwoo-ahn/flutter_naver_login.git
+      ref: master
+  kakao_flutter_sdk_user: ^1.2.1
+  google_sign_in: ^5.4.1
+  flutter_facebook_auth: ^4.4.1
 
 dev_dependencies:
   flutter_test:
