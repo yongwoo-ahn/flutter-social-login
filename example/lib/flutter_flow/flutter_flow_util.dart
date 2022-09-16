@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -9,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../main.dart';
 
-import 'lat_lng.dart';
+//import 'lat_lng.dart';
 
 export 'lat_lng.dart';
 export 'place.dart';
@@ -33,9 +35,16 @@ String dateTimeFormat(String format, DateTime? dateTime) {
 }
 
 Future launchURL(String url) async {
-  var uri = Uri.parse(url).toString();
+  /*var uri = Uri.parse(url).toString();
   try {
     await launch(uri);
+  } catch (e) {
+    throw 'Could not launch $uri: $e';
+  }*/
+
+  var uri = Uri.parse(url);
+  try {
+    await launchUrl(uri);
   } catch (e) {
     throw 'Could not launch $uri: $e';
   }
@@ -191,7 +200,7 @@ void showSnackbar(
           if (loading)
             Padding(
               padding: EdgeInsetsDirectional.only(end: 10.0),
-              child: Container(
+              child: SizedBox(
                 height: 20,
                 width: 20,
                 child: const CircularProgressIndicator(

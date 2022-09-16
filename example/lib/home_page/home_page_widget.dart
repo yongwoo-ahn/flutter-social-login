@@ -1,14 +1,19 @@
+// ignore_for_file: prefer_const_constructors
+
 import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
+//import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
 
+  /*@override
+  _HomePageWidgetState createState() => _HomePageWidgetState();*/
+
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -34,7 +39,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Align(
-            alignment: AlignmentDirectional(0, 0),
+            alignment: const AlignmentDirectional(0, 0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -48,19 +53,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(67, 68, 55, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(67, 68, 55, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 13, 0, 12),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 13, 0, 12),
                         child: Text(
                           '포카앨범은 메이크스타 계정을 사용해요!',
                           textAlign: TextAlign.start,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
-                                    color: Color(0xFFA5A5A5),
+                                    color: const Color(0xFFA5A5A5),
                                     fontSize: 13,
                                     fontWeight: FontWeight.w100,
                                   ),
@@ -76,7 +82,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 18, 20, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(20, 18, 20, 0),
                   child: TextFormField(
                     controller: textController1,
                     autofocus: true,
@@ -86,52 +92,52 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       hintStyle:
                           FlutterFlowTheme.of(context).bodyText2.override(
                                 fontFamily: 'Poppins',
-                                color: Color(0xFF575757),
+                                color: const Color(0xFF575757),
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
                               ),
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
-                      focusedErrorBorder: UnderlineInputBorder(
+                      focusedErrorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
                       filled: true,
-                      fillColor: Color(0xFF303030),
+                      fillColor: const Color(0xFF303030),
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
@@ -141,7 +147,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                   child: TextFormField(
                     controller: textController2,
                     autofocus: true,
@@ -151,51 +157,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       hintStyle:
                           FlutterFlowTheme.of(context).bodyText2.override(
                                 fontFamily: 'Poppins',
-                                color: Color(0xFF575757),
+                                color: const Color(0xFF575757),
                                 fontWeight: FontWeight.normal,
                               ),
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
-                      focusedErrorBorder: UnderlineInputBorder(
+                      focusedErrorBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0),
                         ),
                       ),
                       filled: true,
-                      fillColor: Color(0xFF303030),
+                      fillColor: const Color(0xFF303030),
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
@@ -206,7 +212,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +220,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       Container(
                         width: 50,
                         height: 0.1,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFA5A5A5),
                         ),
                       ),
@@ -223,14 +229,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyText2.override(
                               fontFamily: 'Poppins',
-                              color: Color(0xFFA5A5A5),
+                              color: const Color(0xFFA5A5A5),
                               fontWeight: FontWeight.normal,
                             ),
                       ),
                       Container(
                         width: 50,
                         height: 0.1,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFA5A5A5),
                         ),
                       ),
@@ -238,13 +244,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(94, 40, 94, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(94, 40, 94, 0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -256,7 +263,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 color: Colors.transparent,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Color(0x30A5A5A5),
+                                  color: const Color(0x30A5A5A5),
                                   width: 1,
                                 ),
                               ),
@@ -274,7 +281,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 color: Colors.transparent,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Color(0x30A5A5A5),
+                                  color: const Color(0x30A5A5A5),
                                   width: 1,
                                 ),
                               ),
@@ -292,7 +299,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 color: Colors.transparent,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Color(0x30A5A5A5),
+                                  color: const Color(0x30A5A5A5),
                                   width: 1,
                                 ),
                               ),
@@ -307,7 +314,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -319,7 +327,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 color: Colors.transparent,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Color(0x30A5A5A5),
+                                  color: const Color(0x30A5A5A5),
                                   width: 1,
                                 ),
                               ),
@@ -337,7 +345,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 color: Colors.transparent,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Color(0x30A5A5A5),
+                                  color: const Color(0x30A5A5A5),
                                   width: 1,
                                 ),
                               ),
@@ -355,7 +363,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 color: Colors.transparent,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Color(0x30A5A5A5),
+                                  color: const Color(0x30A5A5A5),
                                   width: 1,
                                 ),
                               ),
@@ -373,12 +381,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 102, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 102, 0, 0),
                   child: Text(
                     '회원가입/로그인하여 이용약관과 개인정보취급방침 에 동의합니다.',
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
-                          color: Color(0xFFA5A5A5),
+                          color: const Color(0xFFA5A5A5),
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
                         ),

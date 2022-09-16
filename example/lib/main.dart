@@ -9,7 +9,7 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
-import 'index.dart';
+//import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +25,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 
+  // ignore: library_private_types_in_public_api
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
 }
@@ -51,9 +52,9 @@ class _MyAppState extends State<MyApp> {
   void setLocale(String language) =>
       setState(() => _locale = createLocale(language));
   void setThemeMode(ThemeMode mode) => setState(() {
-    _themeMode = mode;
-    FlutterFlowTheme.saveThemeMode(mode);
-  });
+        _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
+      });
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
@@ -61,8 +62,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _flutterSocialLoginPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _flutterSocialLoginPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -75,6 +76,8 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _platformVersion = platformVersion;
     });
+
+    debugPrint(_platformVersion);
   }
 
   @override
@@ -91,7 +94,7 @@ class _MyAppState extends State<MyApp> {
     );*/
     return MaterialApp.router(
       title: 'LoginSample',
-      localizationsDelegates: [
+      localizationsDelegates: const [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -107,6 +110,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-

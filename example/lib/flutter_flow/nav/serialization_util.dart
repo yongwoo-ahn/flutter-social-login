@@ -33,26 +33,26 @@ String? serializeParam(dynamic param, ParamType paramType) {
         return param.toString();
       case ParamType.double:
         return param.toString();
-      case ParamType.String:
+      case ParamType.string:
         return param;
       case ParamType.bool:
         return param ? 'true' : 'false';
-      case ParamType.DateTime:
+      case ParamType.dateTime:
         return (param as DateTime).millisecondsSinceEpoch.toString();
-      case ParamType.DateTimeRange:
+      case ParamType.dateTimeRange:
         return dateTimeRangeToString(param as DateTimeRange);
-      case ParamType.LatLng:
+      case ParamType.latLng:
         return (param as LatLng).serialize();
-      case ParamType.FFPlace:
+      case ParamType.fFPlace:
         return placeToString(param as FFPlace);
-      case ParamType.JSON:
+      case ParamType.json:
         return json.encode(param);
 
       default:
         return null;
     }
   } catch (e) {
-    print('Error serializing parameter: $e');
+    debugPrint('Error serializing parameter: $e');
     return null;
   }
 }
@@ -107,7 +107,7 @@ FFPlace placeFromString(String placeStr) {
   );
 }
 
-enum ParamType {
+/*enum ParamType {
   int,
   double,
   String,
@@ -117,6 +117,18 @@ enum ParamType {
   LatLng,
   FFPlace,
   JSON,
+}*/
+
+enum ParamType {
+  int,
+  double,
+  string,
+  bool,
+  dateTime,
+  dateTimeRange,
+  latLng,
+  fFPlace,
+  json,
 }
 
 dynamic deserializeParam(
@@ -132,29 +144,29 @@ dynamic deserializeParam(
         return int.tryParse(param);
       case ParamType.double:
         return double.tryParse(param);
-      case ParamType.String:
+      case ParamType.string:
         return param;
       case ParamType.bool:
         return param == 'true';
-      case ParamType.DateTime:
+      case ParamType.dateTime:
         final milliseconds = int.tryParse(param);
         return milliseconds != null
             ? DateTime.fromMillisecondsSinceEpoch(milliseconds)
             : null;
-      case ParamType.DateTimeRange:
+      case ParamType.dateTimeRange:
         return dateTimeRangeFromString(param);
-      case ParamType.LatLng:
+      case ParamType.latLng:
         return latLngFromString(param);
-      case ParamType.FFPlace:
+      case ParamType.fFPlace:
         return placeFromString(param);
-      case ParamType.JSON:
+      case ParamType.json:
         return json.decode(param);
 
       default:
         return null;
     }
   } catch (e) {
-    print('Error deserializing parameter: $e');
+    debugPrint('Error deserializing parameter: $e');
     return null;
   }
 }
