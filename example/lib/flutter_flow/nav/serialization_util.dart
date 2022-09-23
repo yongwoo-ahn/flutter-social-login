@@ -107,18 +107,6 @@ FFPlace placeFromString(String placeStr) {
   );
 }
 
-/*enum ParamType {
-  int,
-  double,
-  String,
-  bool,
-  DateTime,
-  DateTimeRange,
-  LatLng,
-  FFPlace,
-  JSON,
-}*/
-
 enum ParamType {
   int,
   double,
