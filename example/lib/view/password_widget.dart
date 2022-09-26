@@ -305,10 +305,11 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                 fontWeight: FontWeight.normal,
               ),
           onChanged: (text) {
-            var check = checkPasswordConditions(text);
+            //var check = checkPasswordConditions(text);
+            CheckPassword check = CheckPassword(text);
 
             setState(() {
-              if (check.checkEnglish == true) {
+              if (check.isHaveEnglish() == true) {
                 checkPasswordEnglishColor = const Color(0xFF14B9CB);
                 checkPasswordEnglishImage =
                     'assets/images/status_check_mint.png';
@@ -317,7 +318,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                 checkPasswordEnglishImage = 'assets/images/status_check_gr.png';
               }
 
-              if (check.checkNumber == true) {
+              if (check.isHaveNumber() == true) {
                 checkPasswordNumberColor = const Color(0xFF14B9CB);
                 checkPasswordNumberImage =
                     'assets/images/status_check_mint.png';
@@ -326,7 +327,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                 checkPasswordNumberImage = 'assets/images/status_check_gr.png';
               }
 
-              if (check.checkLength == true) {
+              if (check.isHave8Char() == true) {
                 checkPasswordLengthColor = const Color(0xFF14B9CB);
                 checkPasswordLengthImage =
                     'assets/images/status_check_mint.png';
@@ -335,7 +336,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                 checkPasswordLengthImage = 'assets/images/status_check_gr.png';
               }
 
-              if (check.allCheck == true) {
+              if (check.isHaveAll() == true) {
                 passwordAllCheck = true;
                 loginButtonFillColor = const Color(0xFFFF0099);
                 loginButtonFontColor = const Color(0xFFFFFFFF);

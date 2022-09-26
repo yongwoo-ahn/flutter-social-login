@@ -1,49 +1,49 @@
 //비밀번호 조건 체크
 class CheckPassword {
-  bool checkEnglish;
-  bool checkNumber;
-  bool checkLength;
+  String password;
 
-  CheckPassword({
-    this.checkEnglish = false,
-    this.checkNumber = false,
-    this.checkLength = false,
-  });
+  CheckPassword(this.password);
 
-  bool get allCheck => (checkEnglish && checkNumber && checkLength);
-}
+  static final RegExp englishRegExp = RegExp(r"[a-zA-Z]");
+  static final RegExp numberRegExp = RegExp(r"(\d+)");
+  static final RegExp specialCharRegExp = RegExp(r"[!@#$%^&*]");
 
-CheckPassword checkPasswordConditions(String password) {
-  var checkPassword = CheckPassword();
-
-  final checkPasswordEnglish = RegExp(r"[a-zA-Z]");
-  final checkPasswordNumber = RegExp(r"(\d+)");
-
-  //비밀번호를 입력하지 않은 경우
-  if (password.isEmpty) {
-    return CheckPassword();
+  bool isHaveEnglish() {
+    if (englishRegExp.hasMatch(password)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  //영문포함
-  if (checkPasswordEnglish.hasMatch(password)) {
-    checkPassword.checkEnglish = true;
-  } else {
-    checkPassword.checkEnglish = false;
+  bool isHaveNumber() {
+    if (numberRegExp.hasMatch(password)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  //숫자포함
-  if (checkPasswordNumber.hasMatch(password)) {
-    checkPassword.checkNumber = true;
-  } else {
-    checkPassword.checkNumber = false;
+  bool isHaveSpecialChar() {
+    if (specialCharRegExp.hasMatch(password)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  //글자수
-  if (password.length >= 8) {
-    checkPassword.checkLength = true;
-  } else {
-    checkPassword.checkLength = false;
+  bool isHave8Char() {
+    if (password.length >= 8) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  return checkPassword;
+  bool isHaveAll() {
+    return isHaveNumber() &&
+        isHaveEnglish() &&
+        isHaveSpecialChar() &&
+        isHave8Char();
+  }
 }
