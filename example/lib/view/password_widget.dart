@@ -1,14 +1,8 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart' as dio;
-
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../auth_constant.dart';
-import '../auth_api.dart';
+import '../controller/login_api.dart';
+import '../controller/check_password_conditions.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class PasswordWidget extends StatefulWidget {
   const PasswordWidget({required this.email, Key? key}) : super(key: key);
@@ -416,7 +410,6 @@ class _PasswordWidgetState extends State<PasswordWidget> {
       child: FFButtonWidget(
         onPressed: () {
           if (passwordAllCheck == true) {
-            //getAccountSignInWithEmail(widget.email, textController!.text);
             getToken(widget.email, textController!.text);
           }
         },
@@ -438,157 +431,5 @@ class _PasswordWidgetState extends State<PasswordWidget> {
         ),
       ),
     );
-  }
-}
-
-//비밀번호 조건 체크
-class CheckPassword {
-  bool checkEnglish;
-  bool checkNumber;
-  bool checkLength;
-
-  CheckPassword({
-    this.checkEnglish = false,
-    this.checkNumber = false,
-    this.checkLength = false,
-  });
-
-  bool get allCheck => (checkEnglish && checkNumber && checkLength);
-}
-
-CheckPassword checkPasswordConditions(String password) {
-  var checkPassword = CheckPassword();
-
-  final checkPasswordEnglish = RegExp(r"[a-zA-Z]");
-  final checkPasswordNumber = RegExp(r"(\d+)");
-
-  //비밀번호를 입력하지 않은 경우
-  if (password.isEmpty) {
-    return CheckPassword();
-  }
-
-  //영문포함
-  if (checkPasswordEnglish.hasMatch(password)) {
-    checkPassword.checkEnglish = true;
-  } else {
-    checkPassword.checkEnglish = false;
-  }
-
-  //숫자포함
-  if (checkPasswordNumber.hasMatch(password)) {
-    checkPassword.checkNumber = true;
-  } else {
-    checkPassword.checkNumber = false;
-  }
-
-  //글자수
-  if (password.length >= 8) {
-    checkPassword.checkLength = true;
-  } else {
-    checkPassword.checkLength = false;
-  }
-
-  return checkPassword;
-}
-
-//로그인
-class AccountSignInWithEmail {
-  final bool result;
-  final String message;
-  final String code;
-  final Object? externalData;
-  final Object user;
-  final String refreshToken;
-  final String accessToken;
-
-  AccountSignInWithEmail({
-    required this.result,
-    required this.message,
-    required this.code,
-    required this.externalData,
-    required this.user,
-    required this.refreshToken,
-    required this.accessToken,
-  });
-
-  factory AccountSignInWithEmail.fromJson(Map<String, dynamic> json) {
-    return AccountSignInWithEmail(
-      result: json['result'],
-      message: json['message'],
-      code: json['code'],
-      externalData: json['externalData'],
-      user: json['user'],
-      refreshToken: json['refresh_token'],
-      accessToken: json['access_token'],
-    );
-  }
-}
-
-Future<AccountSignInWithEmail> getAccountSignInWithEmail(
-    String email, String password) async {
-  const storage = FlutterSecureStorage();
-
-  Map data = {
-    'email': email,
-    'password': password,
-  };
-
-  final response = await http.post(
-    Uri.parse(
-        'https://auth-dev.makestar.com/apis/v1/user/account/signin_with_email/'),
-    headers: {'Content-Type': 'application/json; charset=UTF-8'},
-    body: json.encode(data),
-  );
-
-  final responseUTF8 = utf8.decode(response.bodyBytes);
-  final responseJson = jsonDecode(responseUTF8);
-
-  if (response.statusCode == 200) {
-    debugPrint(
-        'login message: ${AccountSignInWithEmail.fromJson(responseJson).message}');
-    debugPrint(
-        'accessToken: ${AccountSignInWithEmail.fromJson(responseJson).accessToken}');
-    debugPrint(
-        'refreshToken: ${AccountSignInWithEmail.fromJson(responseJson).refreshToken}');
-
-    await storage.write(
-        key: 'AcessToken',
-        value: AccountSignInWithEmail.fromJson(responseJson).accessToken);
-    await storage.write(
-        key: 'RefreshToken',
-        value: AccountSignInWithEmail.fromJson(responseJson).refreshToken);
-
-    var allToken = await storage.readAll();
-    debugPrint('allToken: $allToken');
-  } else {
-    debugPrint('login fail${response.statusCode}');
-  }
-
-  return AccountSignInWithEmail.fromJson(responseJson);
-}
-
-//dio
-Future<bool> getToken(String email, String password) async {
-  const storage = FlutterSecureStorage();
-
-  AuthAPIRequest apiRequest =
-      await (AuthAPIRequestBuilder(AuthConstant.apiLoginURL, 'POST')
-            ..withBodyData({
-              AuthConstant.paramEmail: email,
-              AuthConstant.paramPassword: password,
-            }))
-          .build();
-  try {
-    dio.Response response = await apiRequest.send();
-    final jsonData = response.data;
-
-    await storage.write(
-        key: 'AcessToken', value: jsonData[AuthConstant.paramAccessToken]);
-    await storage.write(
-        key: 'RefreshToken', value: jsonData[AuthConstant.paramAccessToken]);
-
-    return jsonData[AuthConstant.paramResult];
-  } on Exception {
-    return false;
   }
 }

@@ -1,16 +1,11 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart' as dio;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart' as http;
 
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../password/password_widget.dart';
-import '../auth_constant.dart';
-import '../auth_api.dart';
+import '../view/password_widget.dart';
+import '../controller/login_api.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
@@ -22,12 +17,13 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget> {
   TextEditingController? textController;
 
-  late bool accountInfoBoxVisible = false; //계정 도움말 박스 표시 여부
-  late bool checkEmailFormat = false; //이메일 조건 체크
-  late Color loginButtonFillColor = const Color(0xFF303030); //로그인 버튼 색깔
-  late Color loginButtonFontColor = const Color(0xFF575757); //로그인 버튼 글자색
+  bool accountInfoBoxVisible = false; //계정 도움말 박스 표시 여부
+  bool checkEmailFormat = false; //이메일 조건 체크
+  Color loginButtonFillColor = const Color(0xFF303030); //로그인 버튼 색깔
+  Color loginButtonFontColor = const Color(0xFF575757); //로그인 버튼 글자색
 
-  final emailFormat = RegExp(r"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+"); //이메일 조건
+  final emailFormat = RegExp(
+      r'^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*))@((([^<>()\[\]\\.,;:\s@"]+\.)+([^<>()\[\]\\.,;:\s@"]+)))$'); //이메일 조건
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   checkEmailCallback(bool checkInputEmail) {
@@ -264,8 +260,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: FFButtonWidget(
         onPressed: () {
           if (checkEmailFormat == true) {
-            //getAccountIsRegisteredEmail(textController!.text);
-
             checkUsingEmail(textController!.text).then((value) => {
                   if (value == true)
                     {checkEmailCallback(true)}
@@ -463,43 +457,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     debugPrint('Click');
   }
 
-  Future<AccountIsRegisteredEmail> getAccountIsRegisteredEmail(
-      String email) async {
-    Map data = {'email': email};
-
-    const String registeredEmailUrl =
-        'https://auth-dev.makestar.com/apis/v1/user/account/is_registered_email/';
-
-    final response = await http.post(
-      Uri.parse(registeredEmailUrl),
-      headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: json.encode(data),
-    );
-    //final responseJson = jsonDecode(response.body);
-
-    final responseUTF8 = utf8.decode(response.bodyBytes);
-    final responseJson = jsonDecode(responseUTF8);
-
-    if (response.statusCode == 200) {
-      debugPrint(
-          'normal login result: ${AccountIsRegisteredEmail.fromJson(responseJson).result}');
-
-      setState(() {
-        if (AccountIsRegisteredEmail.fromJson(responseJson).result == true) {
-          checkEmailCallback(true);
-        } else {
-          checkEmailCallback(false);
-        }
-      });
-    } else {
-      debugPrint('normal login fail: ${response.statusCode}');
-    }
-
-    return AccountIsRegisteredEmail.fromJson(responseJson);
-  }
-
   //dio
-  Future<bool> checkUsingEmail(String email) async {
+  /* Future<bool> checkUsingEmail(String email) async {
     AuthAPIRequest apiRequest = await (AuthAPIRequestBuilder(
             AuthConstant.apiIsRegisteredEmailURL, 'POST')
           ..withBodyData({
@@ -513,103 +472,5 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     } on Exception {
       return false;
     }
-  }
-}
-
-//일반 로그인 이메일 회원가입 여부 확인
-class AccountIsRegisteredEmail {
-  final bool result;
-  final String message;
-  final String code;
-  final Object? externalData;
-
-  AccountIsRegisteredEmail({
-    required this.result,
-    required this.message,
-    required this.code,
-    required this.externalData,
-  });
-
-  factory AccountIsRegisteredEmail.fromJson(Map<String, dynamic> json) {
-    return AccountIsRegisteredEmail(
-      result: json['result'],
-      message: json['message'],
-      code: json['code'],
-      externalData: json['external_data'],
-    );
-  }
-}
-
-//소셜 로그인 회원가입여부 확인
-class AccountIsRegisteredSocialAccount {
-  final bool result;
-  final String message;
-  final String code;
-  final Object? externalData;
-
-  AccountIsRegisteredSocialAccount({
-    required this.result,
-    required this.message,
-    required this.code,
-    required this.externalData,
-  });
-
-  factory AccountIsRegisteredSocialAccount.fromJson(Map<String, dynamic> json) {
-    return AccountIsRegisteredSocialAccount(
-        result: json['result'],
-        message: json['message'],
-        code: json['code'],
-        externalData: json['external_data']);
-  }
-}
-
-Future<AccountIsRegisteredSocialAccount> getAccountIsRegisteredSocialAccount(
-    String social, String socialID) async {
-  String? socialSite;
-
-  switch (social) {
-    case 'MAKESTAR':
-      socialSite = 'Makestar';
-      break;
-    case 'GOOGLE':
-      socialSite = 'Google';
-      break;
-    case 'TWITTER':
-      socialSite = 'Twitter';
-      break;
-    case 'FACEBOOK':
-      socialSite = 'Twitter';
-      break;
-    case 'APPLE':
-      socialSite = 'Apple';
-      break;
-    case 'KAKAO':
-      socialSite = 'Kakao';
-      break;
-    case 'NAVER':
-      socialSite = 'Naver';
-      break;
-  }
-
-  Map data = {
-    'social_provider': [social, socialSite!],
-    'social_id': socialID,
-  };
-
-  final response = await http.post(
-    Uri.parse(
-        'https://auth-dev.makestar.com/apis/v1/user/account/is_registered_email/'),
-    headers: {'Content-Type': 'application/json'},
-    body: json.encode(data),
-  );
-  final responseJson = jsonDecode(response.body);
-
-  if (response.statusCode == 200) {
-    debugPrint(
-        'social login result: ${AccountIsRegisteredSocialAccount.fromJson(responseJson).result}');
-  } else {
-    debugPrint('social login fail${response.statusCode}');
-  }
-
-  return AccountIsRegisteredSocialAccount.fromJson(responseJson);
+  }*/
 }

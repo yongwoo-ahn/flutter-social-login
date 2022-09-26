@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 //import 'package:pocaalbum/controller/user/user_controller.dart';
 //import 'package:pocaalbum/utils/common/exception.dart';
 //import 'package:pocaalbum/utils/constant/auth_constant.dart';
-import 'auth_constant.dart';
+import '/constant/auth_constant.dart';
 
 class Builder {
   final String relativeUrl;
