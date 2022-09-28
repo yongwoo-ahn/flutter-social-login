@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../view/password_widget.dart';
-import '../controller/login_api.dart';
+import '../controller/login_controller.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
@@ -18,11 +18,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   TextEditingController? textController;
 
   bool accountInfoBoxVisible = false; //계정 도움말 박스 표시 여부
-  bool checkEmailFormat = false; //이메일 조건 체크
+  bool checkEmailRegExp = false; //이메일 조건 체크
   Color loginButtonFillColor = const Color(0xFF303030); //로그인 버튼 색깔
   Color loginButtonFontColor = const Color(0xFF575757); //로그인 버튼 글자색
 
-  final emailFormat = RegExp(
+  final emailRegExp = RegExp(
       r'^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*))@((([^<>()\[\]\\.,;:\s@"]+\.)+([^<>()\[\]\\.,;:\s@"]+)))$'); //이메일 조건
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -236,17 +236,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
         textAlign: TextAlign.start,
         onChanged: (text) {
-          if (emailFormat.hasMatch(text)) {
+          if (emailRegExp.hasMatch(text)) {
             setState(() {
               loginButtonFillColor = const Color(0XFFFF0099);
               loginButtonFontColor = const Color(0xFFFFFFFF);
-              checkEmailFormat = true;
+              checkEmailRegExp = true;
             });
           } else {
             setState(() {
               loginButtonFillColor = const Color(0xFF303030);
               loginButtonFontColor = const Color(0xFF575757);
-              checkEmailFormat = false;
+              checkEmailRegExp = false;
             });
           }
         },
@@ -259,7 +259,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
       child: FFButtonWidget(
         onPressed: () {
-          if (checkEmailFormat == true) {
+          if (checkEmailRegExp == true) {
             checkUsingEmail(textController!.text).then((value) => {
                   if (value == true)
                     {checkEmailCallback(true)}
@@ -456,21 +456,4 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   sampleOnClick() {
     debugPrint('Click');
   }
-
-  //dio
-  /* Future<bool> checkUsingEmail(String email) async {
-    AuthAPIRequest apiRequest = await (AuthAPIRequestBuilder(
-            AuthConstant.apiIsRegisteredEmailURL, 'POST')
-          ..withBodyData({
-            AuthConstant.paramEmail: email,
-          }))
-        .build();
-    try {
-      dio.Response response = await apiRequest.send();
-      final jsonData = response.data;
-      return jsonData[AuthConstant.paramResult];
-    } on Exception {
-      return false;
-    }
-  }*/
 }

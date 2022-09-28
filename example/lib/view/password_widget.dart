@@ -1,6 +1,6 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../controller/login_api.dart';
+import '../controller/login_controller.dart';
 import '../controller/check_password_conditions.dart';
 import 'package:flutter/material.dart';
 
@@ -411,7 +411,12 @@ class _PasswordWidgetState extends State<PasswordWidget> {
       child: FFButtonWidget(
         onPressed: () {
           if (passwordAllCheck == true) {
-            getToken(widget.email, textController!.text);
+            saveToken(widget.email, textController!.text).then((value) => {
+                  if (value == true)
+                    {debugPrint('success'), getOwnNfcAlbumList()}
+                  else
+                    {debugPrint('fail')}
+                });
           }
         },
         text: '이메일 인증',
