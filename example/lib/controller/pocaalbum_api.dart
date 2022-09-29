@@ -59,6 +59,14 @@ class PocaalbumAPIRequsetBuilder implements Builder {
     withId = true;
   }
 
+  void withBodyData(Map<String, dynamic> data) {
+    this.data = data;
+  }
+
+  void withQueryParams(Map<String, dynamic> queryParameters) {
+    this.queryParameters = queryParameters;
+  }
+
   @override
   String getBaseUrl() {
     StringBuffer buffer = StringBuffer();

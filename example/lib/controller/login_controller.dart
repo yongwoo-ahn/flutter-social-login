@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart' as dio;
-import 'package:flutter/widgets.dart';
 import 'package:flutter_social_login_example/constant/pacaalbum_constant.dart';
 
 import '../constant/auth_constant.dart';
@@ -48,7 +47,7 @@ Future<bool> saveToken(String email, String password) async {
   }
 }
 
-Future<bool> getOwnNfcAlbumList() async {
+Future<String> getOwnNfcAlbumList() async {
   PocaalbumAPIRequset pocaApiRequest = await (PocaalbumAPIRequsetBuilder(
           PocaAlbumConstant.apiGetOwnNfcAlbumListURL, 'POST')
         ..withIdentification())
@@ -56,10 +55,12 @@ Future<bool> getOwnNfcAlbumList() async {
   try {
     dio.Response response = await pocaApiRequest.send();
     final jsonData = response.data;
+    //debugPrint(jsonData[PocaAlbumConstant.paramExeternalData][PocaAlbumConstant.paramAlbumList].toString());
 
-    debugPrint(jsonData[PocaAlbumConstant.paramAlbumList].toString());
-    return jsonData[PocaAlbumConstant.paramResult];
+    return jsonData[PocaAlbumConstant.paramExeternalData]
+            [PocaAlbumConstant.paramAlbumList]
+        .toString();
   } on Exception {
-    return false;
+    return 'false';
   }
 }

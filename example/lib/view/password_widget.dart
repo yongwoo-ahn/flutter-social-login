@@ -2,6 +2,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../controller/login_controller.dart';
 import '../controller/check_password_conditions.dart';
+import '../view/poca_list_page_widget.dart';
 import 'package:flutter/material.dart';
 
 class PasswordWidget extends StatefulWidget {
@@ -413,7 +414,23 @@ class _PasswordWidgetState extends State<PasswordWidget> {
           if (passwordAllCheck == true) {
             saveToken(widget.email, textController!.text).then((value) => {
                   if (value == true)
-                    {debugPrint('success'), getOwnNfcAlbumList()}
+                    {
+                      // getOwnNfcAlbumList().then((value){
+                      //   List<String> albumKeyValueList = value.replaceAll('{', '').replaceAll('}', '').replaceAll(',', '').replaceAll(' ', '').split(RegExp(r':\[\d+\]'));
+                      //   albumKeyValueList.removeLast(); //리스트 마지막 값 null값임
+                      //
+                      //   //debugPrint(albumKeyValueList.length.toString());
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => PocaListWidget(pocaList: albumKeyValueList))
+                      //   );
+                      // })
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PocaListWidget()))
+                    }
                   else
                     {debugPrint('fail')}
                 });
