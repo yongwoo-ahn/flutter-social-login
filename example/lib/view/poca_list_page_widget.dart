@@ -1,5 +1,6 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../controller/poca_list_page_controller.dart';
+import '../view/poca_video_list_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -44,7 +45,6 @@ class _PocaListWidgetState extends State<PocaListWidget> {
                   children: [
                     pocaListSorting(), //포카 이미지 정렬
                     pocaImageListArea(), //포카 이미지 리스트
-                    //(ownAlbumListInfo.isEmpty) ? Text('dddd', style: TextStyle(color: Colors.white),) : Text(ownAlbumListInfo[0].ownAlbumArtistName, style: TextStyle(color: Colors.white),)
                   ],
                 ),
         ),
@@ -111,7 +111,7 @@ class _PocaListWidgetState extends State<PocaListWidget> {
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          itemCount: 2,
+          itemCount: ownAlbumListInfo.length,
           itemBuilder: (context, index) {
             return [
               for (int i = 0; i < ownAlbumListInfo.length; i++)
@@ -127,17 +127,29 @@ class _PocaListWidgetState extends State<PocaListWidget> {
     return InkWell(
       onTap: () async {
         debugPrint(ownAlbumListInfo[listCount].ownAlbumArtistName);
+        getNfcAlbumVideo(ownAlbumListInfo[listCount].ownAlbumUUID)
+            .then((value) {
+          debugPrint(value.length.toString());
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PocaVideoListPageWidget(
+                      selectedNfcAlbumVidoeInfo: value)));
+        });
       },
       child: SizedBox(
         width: 155,
         height: 250,
         child: Column(
           children: [
-            Image.network(
-              ownAlbumListInfo[listCount].ownAlbumBoxImageURL,
-              width: 155,
-              height: 245,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                ownAlbumListInfo[listCount].ownAlbumBoxImageURL,
+                width: 155,
+                height: 245,
+                fit: BoxFit.cover,
+              ),
             )
           ],
         ),

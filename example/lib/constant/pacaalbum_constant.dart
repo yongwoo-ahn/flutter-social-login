@@ -8,7 +8,7 @@ abstract class PocaAlbumConstant {
       'pocaalbum/get_own_nfc_album_list/';
   static const String apiGetOwnAlbumListInfoURL =
       'pocaalbum/get_own_album_list_info/';
-  static const String apiGetNfcAlbumVideo = 'nfc/get_nfc_album_video/';
+  static const String apiGetNfcAlbumVideoURL = 'nfc/get_nfc_album_video/';
 
   static const String paramResult = "result";
   static const String paramCode = "code";
@@ -29,6 +29,7 @@ abstract class PocaAlbumConstant {
   static const String paramBoxIMageURL = 'box_image_url';
   static const String paramUUId = 'uuid';
 
+  static const String paramNfcID = 'nfc_id';
   static const String paramVideoList = 'video_list';
   static const String paramYoutubeList = 'youtube_list';
   static const String paramVideoType = 'video_type';
