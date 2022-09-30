@@ -7,8 +7,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class PocaListWidget extends StatefulWidget {
   const PocaListWidget({Key? key}) : super(key: key);
 
-  //final List<String> pocaList;
-
   @override
   State<PocaListWidget> createState() => _PocaListWidgetState();
 }
@@ -17,6 +15,8 @@ class _PocaListWidgetState extends State<PocaListWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<OwnAlbumListInfoData> ownAlbumListInfo = [];
+
+  bool loadingVisible = false;
 
   @override
   void initState() {
@@ -105,20 +105,28 @@ class _PocaListWidgetState extends State<PocaListWidget> {
 
   Widget pocaImageListArea() {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-        child: MasonryGridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          itemCount: ownAlbumListInfo.length,
-          itemBuilder: (context, index) {
-            return [
-              for (int i = 0; i < ownAlbumListInfo.length; i++)
-                () => pocaItem(i)
-            ][index]();
-          },
-        ),
+      child: Stack(
+        children: [
+          Visibility(
+            visible: loadingVisible,
+            child: loading(),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+            child: MasonryGridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              itemCount: ownAlbumListInfo.length,
+              itemBuilder: (context, index) {
+                return [
+                  for (int i = 0; i < ownAlbumListInfo.length; i++)
+                    () => pocaItem(i)
+                ][index]();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -126,10 +134,14 @@ class _PocaListWidgetState extends State<PocaListWidget> {
   Widget pocaItem(int listCount) {
     return InkWell(
       onTap: () async {
-        debugPrint(ownAlbumListInfo[listCount].ownAlbumArtistName);
+        setState(() {
+          loadingVisible = true;
+        });
         getNfcAlbumVideo(ownAlbumListInfo[listCount].ownAlbumUUID)
             .then((value) {
-          debugPrint(value.length.toString());
+          setState(() {
+            loadingVisible = false;
+          });
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -137,10 +149,15 @@ class _PocaListWidgetState extends State<PocaListWidget> {
                       selectedNfcAlbumVidoeInfo: value)));
         });
       },
-      child: SizedBox(
+      child: Container(
         width: 155,
-        height: 250,
+        height: 300,
+        decoration: const BoxDecoration(
+          color: Color(0x00FFFFFF),
+        ),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
@@ -150,7 +167,20 @@ class _PocaListWidgetState extends State<PocaListWidget> {
                 height: 245,
                 fit: BoxFit.cover,
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+              child: Text(
+                ownAlbumListInfo[listCount].ownAlbumTitle,
+                textAlign: TextAlign.start,
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Poppins',
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    ),
+              ),
+            ),
           ],
         ),
       ),

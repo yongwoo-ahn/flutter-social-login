@@ -1,5 +1,6 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../controller/poca_list_page_controller.dart';
+import '../view/poca_video_play_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -84,7 +85,13 @@ class _PocaVideoListPageWidgetState extends State<PocaVideoListPageWidget> {
   Widget pocaVideoItem(int listCount) {
     return InkWell(
       onTap: () async {
-        //Navigator.pop(context);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PocaVideoPlayWidget(
+                      youtubeID:
+                          widget.selectedNfcAlbumVidoeInfo[listCount].youtubeID,
+                    )));
       },
       child: Container(
         width: 360,
