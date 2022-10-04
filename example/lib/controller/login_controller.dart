@@ -37,7 +37,7 @@ Future<bool> saveToken(String email, String password) async {
     final jsonData = response.data;
 
     await storage.write(
-        key: 'AcessToken', value: jsonData[AuthConstant.paramAccessToken]);
+        key: 'AccessToken', value: jsonData[AuthConstant.paramAccessToken]);
     await storage.write(
         key: 'RefreshToken', value: jsonData[AuthConstant.paramAccessToken]);
 
@@ -55,7 +55,6 @@ Future<String> getOwnNfcAlbumList() async {
   try {
     dio.Response response = await pocaApiRequest.send();
     final jsonData = response.data;
-    //debugPrint(jsonData[PocaAlbumConstant.paramExeternalData][PocaAlbumConstant.paramAlbumList].toString());
 
     return jsonData[PocaAlbumConstant.paramExeternalData]
             [PocaAlbumConstant.paramAlbumList]

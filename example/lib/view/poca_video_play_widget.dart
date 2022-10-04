@@ -41,14 +41,7 @@ class _PocaVideoPlayWidgetState extends State<PocaVideoPlayWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FlutterFlowYoutubePlayer(
-                url: widget.youtubeID,
-                autoPlay: false,
-                looping: true,
-                mute: false,
-                showControls: true,
-                showFullScreen: true,
-              ),
+              pocaYouTubeVideoPlayer(),
             ],
           ),
         ),
@@ -76,6 +69,17 @@ class _PocaVideoPlayWidgetState extends State<PocaVideoPlayWidget> {
       ),
       centerTitle: false,
       elevation: 2,
+    );
+  }
+
+  Widget pocaYouTubeVideoPlayer() {
+    return FlutterFlowYoutubePlayer(
+      url: widget.youtubeID,
+      autoPlay: false,
+      looping: true,
+      mute: false,
+      showControls: true,
+      showFullScreen: false,
     );
   }
 }

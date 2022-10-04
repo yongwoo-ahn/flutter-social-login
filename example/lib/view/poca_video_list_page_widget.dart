@@ -6,10 +6,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PocaVideoListPageWidget extends StatefulWidget {
   const PocaVideoListPageWidget(
-      {required this.selectedNfcAlbumVidoeInfo, Key? key})
+      {required this.selectedNfcAlbumVideoInfo, Key? key})
       : super(key: key);
 
-  final List<NfcAlbumVideo> selectedNfcAlbumVidoeInfo;
+  final List<NfcAlbumVideo> selectedNfcAlbumVideoInfo;
 
   @override
   State<PocaVideoListPageWidget> createState() =>
@@ -71,12 +71,32 @@ class _PocaVideoListPageWidgetState extends State<PocaVideoListPageWidget> {
         crossAxisCount: 1,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        itemCount: widget.selectedNfcAlbumVidoeInfo.length,
+        itemCount: (widget.selectedNfcAlbumVideoInfo.isNotEmpty)
+            ? widget.selectedNfcAlbumVideoInfo.length
+            : 1,
         itemBuilder: (context, index) {
-          return [
-            for (int i = 0; i < widget.selectedNfcAlbumVidoeInfo.length; i++)
-              () => pocaVideoItem(i)
-          ][index]();
+          if (widget.selectedNfcAlbumVideoInfo.isNotEmpty) {
+            return [
+              for (int i = 0; i < widget.selectedNfcAlbumVideoInfo.length; i++)
+                () => pocaVideoItem(i)
+            ][index]();
+          } else {
+            return [
+              () => Container(
+                  width: 360,
+                  height: 74,
+                  decoration: const BoxDecoration(
+                    color: Color(0x00FFFFFF),
+                  ),
+                  child: const Text(
+                    '해당 앨범에는 영상이 없습니다.',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  )),
+            ][index]();
+          }
         },
       ),
     );
@@ -90,7 +110,7 @@ class _PocaVideoListPageWidgetState extends State<PocaVideoListPageWidget> {
             MaterialPageRoute(
                 builder: (context) => PocaVideoPlayWidget(
                       youtubeID:
-                          widget.selectedNfcAlbumVidoeInfo[listCount].youtubeID,
+                          widget.selectedNfcAlbumVideoInfo[listCount].youtubeID,
                     )));
       },
       child: Container(
@@ -103,7 +123,7 @@ class _PocaVideoListPageWidgetState extends State<PocaVideoListPageWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Image.network(
-              widget.selectedNfcAlbumVidoeInfo[listCount].youtubeThumbnailURL,
+              widget.selectedNfcAlbumVideoInfo[listCount].youtubeThumbnailURL,
               width: 132,
               height: 74,
               fit: BoxFit.cover,
@@ -118,7 +138,7 @@ class _PocaVideoListPageWidgetState extends State<PocaVideoListPageWidget> {
                     width: 176,
                     height: 36,
                     child: Text(
-                      widget.selectedNfcAlbumVidoeInfo[listCount].youtubeTitle,
+                      widget.selectedNfcAlbumVideoInfo[listCount].youtubeTitle,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).primaryBtnText,

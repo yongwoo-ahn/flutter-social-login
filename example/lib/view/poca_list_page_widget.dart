@@ -21,12 +21,6 @@ class _PocaListWidgetState extends State<PocaListWidget> {
   @override
   void initState() {
     super.initState();
-
-    getOwnAlbumListInfo().then((value) {
-      setState(() {
-        ownAlbumListInfo = value;
-      });
-    });
   }
 
   @override
@@ -38,15 +32,23 @@ class _PocaListWidgetState extends State<PocaListWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: (ownAlbumListInfo.isEmpty)
-              ? loading()
-              : Column(
+          child: FutureBuilder<List<OwnAlbumListInfoData>>(
+            future: getOwnAlbumListInfo(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                ownAlbumListInfo = snapshot.data!;
+                return Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     pocaListSorting(), //포카 이미지 정렬
                     pocaImageListArea(), //포카 이미지 리스트
                   ],
-                ),
+                );
+              } else {
+                return loading();
+              }
+            },
+          ),
         ),
       ),
     );
@@ -146,12 +148,12 @@ class _PocaListWidgetState extends State<PocaListWidget> {
               context,
               MaterialPageRoute(
                   builder: (context) => PocaVideoListPageWidget(
-                      selectedNfcAlbumVidoeInfo: value)));
+                      selectedNfcAlbumVideoInfo: value)));
         });
       },
       child: Container(
         width: 155,
-        height: 300,
+        height: 326,
         decoration: const BoxDecoration(
           color: Color(0x00FFFFFF),
         ),
@@ -168,18 +170,50 @@ class _PocaListWidgetState extends State<PocaListWidget> {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-              child: Text(
-                ownAlbumListInfo[listCount].ownAlbumTitle,
-                textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Poppins',
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                    ),
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                  child: Text(
+                    ownAlbumListInfo[listCount]
+                        .ownAlbumReleasedAt
+                        .split('T')[0],
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          color: const Color(0xFFC3C3C3),
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
+                  child: Text(
+                    ownAlbumListInfo[listCount].ownAlbumTitle,
+                    textAlign: TextAlign.start,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
+                  child: Text(
+                    ownAlbumListInfo[listCount].ownAlbumArtistName,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          color: const Color(0xFFC3C3C3),
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
